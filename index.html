@@ -1,0 +1,2403 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<meta name="description" content="ACADEMIA CES: plataforma de práctica de 105 preguntas para repaso personal. El progreso se guarda localmente en el navegador.">
+<meta name="robots" content="index,follow">
+<title>ACADEMIA CES | Plataforma de práctica</title>
+<style>
+:root{--ink:#172033;--muted:#667085;--paper:#f6f7fb;--card:#fff;--line:#e5e7eb;--purple:#6d28d9;--pink:#ec4899;--cyan:#06b6d4;--green:#15803d;--red:#b91c1c;--amber:#92400e}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button{font:inherit;cursor:pointer;border:0}button:focus-visible{outline:3px solid #06b6d4;outline-offset:3px}
+.top{background:linear-gradient(120deg,#111827,#312e81 65%,#7e22ce);color:#fff;padding:26px max(20px,calc((100% - 1120px)/2)) 32px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.08em}.pill{font-size:.78rem;padding:5px 10px;border-radius:999px;background:#ffffff20;border:1px solid #ffffff35}
+.hero{display:grid;grid-template-columns:1.4fr .6fr;gap:24px;align-items:center;padding-top:28px}.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.03;margin:0 0 14px}.hero p{color:#e0e7ff;max-width:660px}.hero-art{font-size:5rem;text-align:center;filter:drop-shadow(0 12px 22px #0005)}
+.wrap{max-width:1120px;margin:auto;padding:24px 18px 56px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-4px}.stat,.panel,.question-card,.module{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 5px 20px #1f29370a}.stat{padding:16px}.stat strong{font-size:1.65rem;display:block}.stat span{color:var(--muted);font-size:.88rem}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:28px 0 14px}.section-head h2{margin:0;font-size:1.35rem}.muted{color:var(--muted)}.modules{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.module{padding:16px;text-align:left;transition:.18s;border:1px solid var(--line);color:var(--ink)}.module:hover,.module.active{transform:translateY(-2px);border-color:#8b5cf6;box-shadow:0 8px 22px #6d28d91a}.module .emoji{font-size:1.7rem}.module b{display:block;margin:8px 0 3px}.module small{color:var(--muted)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px;align-items:start;margin-top:18px}.question-card{padding:clamp(18px,3vw,30px)}.qmeta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px}.tag{border-radius:999px;padding:5px 10px;background:#f3e8ff;color:#6b21a8;font-size:.78rem;font-weight:750}.tag.source{background:#e0f2fe;color:#075985}.tag.warning{background:#fef3c7;color:#92400e}.progress{height:7px;border-radius:99px;background:#e5e7eb;overflow:hidden;margin:14px 0 22px}.progress div{height:100%;background:linear-gradient(90deg,var(--pink),var(--purple),var(--cyan));width:0;transition:width .2s}.qtitle{font-size:clamp(1.2rem,2.5vw,1.65rem);line-height:1.35;margin:0 0 10px}.qdesc{color:var(--muted);margin:0 0 22px}.options{display:grid;gap:10px}.option{width:100%;display:flex;align-items:center;text-align:left;gap:12px;padding:14px;border:1.5px solid #d1d5db;border-radius:13px;background:white;color:var(--ink);transition:.15s}.option:hover{border-color:#a78bfa;background:#faf5ff}.letter{width:30px;height:30px;border:1px solid #d1d5db;border-radius:9px;display:grid;place-items:center;flex-shrink:0;font-weight:800;font-size:.85rem}.option.selected{border-color:#7c3aed;background:#f5f3ff}.option.correct{border-color:#16a34a;background:#f0fdf4}.option.wrong{border-color:#dc2626;background:#fef2f2}.option.correct .letter{background:#16a34a;color:white;border-color:#16a34a}.option.wrong .letter{background:#dc2626;color:white;border-color:#dc2626}
+.feedback{margin-top:18px;padding:16px;border-radius:14px;background:#f8fafc;border:1px solid var(--line)}.feedback.good{background:#f0fdf4;border-color:#86efac}.feedback.bad{background:#fff7ed;border-color:#fdba74}.feedback h3{margin:0 0 6px;font-size:1.05rem}.feedback p{margin:5px 0}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{border-radius:11px;padding:11px 16px;font-weight:800}.primary{background:linear-gradient(110deg,#7c3aed,#db2777);color:white}.secondary{background:#f3f4f6;color:#374151;border:1px solid #e5e7eb}.btn:disabled{opacity:.45;cursor:not-allowed}.side{display:grid;gap:14px}.panel{padding:18px}.panel h3{margin:0 0 12px}.panel p{font-size:.92rem;color:var(--muted)}.mini-list{display:grid;gap:10px}.mini-row{display:flex;justify-content:space-between;gap:10px;font-size:.9rem}.mini-row b{font-variant-numeric:tabular-nums}.hintbox{padding:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:12px;color:#78350f}.hidden{display:none!important}.footer{text-align:center;color:var(--muted);font-size:.82rem;padding:24px 10px}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.hero-art{display:none}.modules{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.stats{grid-template-columns:repeat(3,1fr);gap:7px}.stat{padding:11px}.stat strong{font-size:1.25rem}.stat span{font-size:.76rem}.modules{grid-template-columns:1fr 1fr}.module{padding:12px}.side{grid-template-columns:1fr}.top{padding-top:20px}.hero{padding-top:22px}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="nav"><div class="brand">✦ ACADEMIA CES</div><span class="pill">VERSIÓN COMPARTIBLE · 105 PREGUNTAS</span></div>
+ <div class="hero"><div><h1>Estudia. Practica.<br><span style="color:#f9a8d4">Domina el reto.</span></h1><p>Convierte el repaso en una experiencia activa. Responde, descubre la explicación y vuelve a intentarlo. Tu avance se guarda en este navegador.</p></div><div class="hero-art" aria-hidden="true">🎓✨</div></div>
+<div class="quality-banner" role="note" style="margin:14px auto;max-width:1180px;padding:12px 16px;border:1px solid #f0c36d;border-radius:12px;background:#fff8e7;color:#714d00;font-size:.92rem;line-height:1.45"><strong>Versión de estudio — revisión de contenido en curso.</strong> Este sitio permite practicar con el banco actual de 105 preguntas. Algunas preguntas, respuestas o pistas siguen marcadas para revisión; úsalo como apoyo de estudio y no como evaluación oficial. Tu avance se guarda únicamente en este navegador y dispositivo, no se comparte automáticamente con otras personas.</div>
+</header>
+<main class="wrap">
+ <section class="stats" aria-label="Resumen de progreso">
+  <div class="stat"><strong id="statDone">0</strong><span>Respondidas</span></div><div class="stat"><strong id="statScore">—</strong><span>Precisión</span></div><div class="stat"><strong id="statStreak">0</strong><span>Racha actual</span></div>
+ </section>
+ <div class="section-head"><div><h2>Elige tu zona de aprendizaje</h2><div class="muted">Preguntas originales y preguntas elaboradas se identifican por su etiqueta y trazabilidad.</div></div><button class="btn secondary" id="resetProgress">Reiniciar avance</button></div>
+ <section class="modules" id="modules">
+  <button class="module active" data-module="Todos"><span class="emoji">🚀</span><b>Todo el recorrido</b><small>Mezcla de temas</small></button>
+  <button class="module" data-module="Cultura general"><span class="emoji">🖼️</span><b>Cultura general</b><small>Arte, historia y música</small></button>
+  <button class="module" data-module="Ciencias básicas"><span class="emoji">🧬</span><b>Ciencias básicas</b><small>Bioquímica y genética</small></button>
+  <button class="module" data-module="Clínica"><span class="emoji">🩺</span><b>Pistas clínicas</b><small>Revisión cuidadosa</small></button>
+ </section>
+ <div class="layout">
+  <section class="question-card" aria-live="polite">
+   <div class="qmeta"><span class="tag" id="qModule">CULTURA GENERAL</span><span class="tag source" id="qSource">CES 2009</span><span class="tag" id="qType">Selección única</span><span class="tag warning hidden" id="qWarning">Pista por verificar</span></div>
+   <div class="muted" id="qCount">Pregunta 1 del recorrido</div><div class="progress"><div id="progressBar"></div></div>
+   <h2 class="qtitle" id="qTitle"></h2><p class="qdesc" id="qDesc"></p>
+   <div class="options" id="options"></div>
+   <div id="hintArea" class="hintbox hidden" style="margin-top:14px"></div>
+   <div id="feedback" class="feedback hidden"></div>
+   <div class="btnrow"><button class="btn secondary" id="hintBtn">💡 Ver pista</button><button class="btn primary" id="checkBtn" disabled>Comprobar respuesta</button><button class="btn primary hidden" id="nextBtn">Siguiente →</button></div>
+  </section>
+  <aside class="side">
+   <section class="panel"><h3>📈 Tu sesión</h3><div class="mini-list"><div class="mini-row"><span>Aciertos</span><b id="sideCorrect">0</b></div><div class="mini-row"><span>Por revisar</span><b id="sideWrong">0</b></div><div class="mini-row"><span>Pendientes</span><b id="sidePending">10</b></div></div><p>El progreso se almacena solo en este dispositivo y navegador. No se envía a un servidor.</p></section>
+   <section class="panel"><h3>🧭 Ruta sugerida</h3><p>1. Lee la pregunta con calma.<br>2. Elige la respuesta.<br>3. Revisa la explicación.<br>4. Repite las que te cuesten.</p><div class="hintbox">Las pistas de CES 2025 que no permiten confirmar una clave aparecen marcadas. No se califican como hechos verificados.</div></section>
+  </aside>
+ </div>
+ <div class="footer">ACADEMIA CES · Prototipo v12 · 105 preguntas · Material de estudio, no examen oficial ni consejo médico.</div>
+</main>
+<script>
+const questions = [
+  {
+    "id": "cg09-01",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009 · p. 1",
+    "sourceShort": "CES 2009 · p. 1",
+    "type": "single",
+    "q": "¿En qué país se encuentra el desierto de Atacama?",
+    "desc": "Recuerda la ubicación geográfica indicada en el banco de 2009.",
+    "options": [
+      "Chile",
+      "Perú",
+      "Bolivia",
+      "Colombia"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento indica que el desierto de Atacama queda en Chile. También menciona otros desiertos de Sudamérica.",
+    "hint": "Piensa en el desierto situado en la costa pacífica del extremo norte de Chile.",
+    "verified": true
+  },
+  {
+    "id": "cg09-02",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009 · p. 1",
+    "sourceShort": "CES 2009 · p. 1",
+    "type": "single",
+    "q": "¿Quién compuso «El Danubio Azul»?",
+    "desc": "Selecciona el compositor que identifica el documento.",
+    "options": [
+      "Johann Strauss (hijo)",
+      "Johann Strauss (padre)",
+      "Wolfgang Amadeus Mozart",
+      "Felix Mendelssohn"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento atribuye «El Danubio Azul» a Johann Strauss hijo. En la misma nota se menciona la Marcha Radetzky en relación con Strauss padre.",
+    "hint": "El compositor de este vals vienés pertenece a la generación más joven de la familia Strauss.",
+    "verified": true
+  },
+  {
+    "id": "cg10-01",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010 · p. 1",
+    "sourceShort": "CES 2010 · p. 1",
+    "type": "single",
+    "q": "¿Cómo se llama la puerta monumental mostrada al inicio del banco CES 2010?",
+    "desc": "Pregunta de reconocimiento del monumento descrito en la fuente.",
+    "options": [
+      "Puerta de Brandeburgo",
+      "Arco del Triunfo",
+      "Puerta de Alcalá",
+      "Arco de Constantino"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento identifica la imagen como la Puerta de Brandeburgo, ubicada en Berlín, Alemania.",
+    "hint": "Es un monumento emblemático de la capital alemana.",
+    "verified": true
+  },
+  {
+    "id": "cg10-02",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010 · p. 2",
+    "sourceShort": "CES 2010 · p. 2",
+    "type": "single",
+    "q": "¿Quién escribió la novela «El lobo estepario»?",
+    "desc": "Identifica al autor mencionado en el banco.",
+    "options": [
+      "Hermann Hesse",
+      "Thomas Mann",
+      "Franz Kafka",
+      "Stefan Zweig"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente señala a Hermann Karl Hesse y menciona que recibió el Premio Nobel de Literatura en 1946.",
+    "hint": "El escritor nació en Alemania y posteriormente tuvo nacionalidad suiza.",
+    "verified": true
+  },
+  {
+    "id": "cem-b-01",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 4",
+    "sourceShort": "CEM - B · p. 4",
+    "type": "single",
+    "q": "¿Cuál de estas células se caracteriza por tener núcleo?",
+    "desc": "Pregunta basada en la sección «Estructura celular».",
+    "options": [
+      "Célula eucariota",
+      "Célula procariota",
+      "Virión",
+      "Prion"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material CEM - B resume la diferencia diciendo que la célula eucariota tiene núcleo y la procariota no tiene núcleo.",
+    "hint": "El prefijo «eu-» se asocia aquí con la organización celular que incluye un núcleo.",
+    "verified": true
+  },
+  {
+    "id": "cem-b-02",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 5",
+    "sourceShort": "CEM - B · p. 5",
+    "type": "multi",
+    "q": "Según CEM - B, ¿qué procesos se relacionan con la mitocondria?",
+    "desc": "Selecciona todas las opciones respaldadas por el apartado sobre mitocondria.",
+    "options": [
+      "Ciclo de Krebs en la matriz mitocondrial",
+      "Cadena transportadora de electrones en la membrana mitocondrial interna",
+      "Síntesis de todas las proteínas celulares en el núcleo",
+      "Beta-oxidación de ácidos grasos de cadena corta, media y larga"
+    ],
+    "correct": [
+      0,
+      1,
+      3
+    ],
+    "explain": "El documento ubica el ciclo de Krebs en la matriz, la cadena transportadora en la membrana interna y la beta-oxidación de ácidos grasos de cadena corta, media y larga en la mitocondria. No afirma que todas las proteínas celulares se sinteticen en el núcleo.",
+    "hint": "Revisa las tres funciones energéticas enumeradas en el apartado de mitocondria.",
+    "verified": true
+  },
+  {
+    "id": "cem-b-03",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 30 aprox. (índice y contenido temático)",
+    "sourceShort": "CEM - B · genética",
+    "type": "single",
+    "q": "¿Qué dirección de nomenclatura señala el documento para las cadenas de ácidos nucleicos?",
+    "desc": "El material de genética incluye la orientación de los enlaces fosfodiéster.",
+    "options": [
+      "5′ a 3′",
+      "3′ a 5′ únicamente",
+      "De N a C",
+      "De C a N"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material afirma que la nomenclatura de la unión de nucleótidos por enlace fosfodiéster se expresa en sentido 5′–3′.",
+    "hint": "La orientación de los ácidos nucleicos se representa con los carbonos 5′ y 3′ de la pentosa.",
+    "verified": true
+  },
+  {
+    "id": "p25-01",
+    "module": "Clínica",
+    "source": "CES 2025 SOLO PISTAS · p. 1",
+    "sourceShort": "CES 2025 · p. 1",
+    "type": "single",
+    "q": "La pista «paciente vegano con anemia y síntomas neurológicos» propone como posible explicación una deficiencia de:",
+    "desc": "La respuesta está escrita en el archivo de pistas. Se incluye para estudiar la asociación clínica, no como caso clínico completo.",
+    "options": [
+      "Vitamina B12",
+      "Vitamina C",
+      "Vitamina K",
+      "Vitamina B1"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La pista del documento propone deficiencia de B12. La asociación es una pista de repaso; el archivo no aporta historia clínica ni datos de laboratorio para evaluar un paciente real.",
+    "hint": "Considera qué vitamina se relaciona con la hematopoyesis y el mantenimiento neurológico.",
+    "verified": true,
+    "warning": true
+  },
+  {
+    "id": "p25-02",
+    "module": "Clínica",
+    "source": "CES 2025 SOLO PISTAS · p. 1",
+    "sourceShort": "CES 2025 · p. 1",
+    "type": "single",
+    "q": "La pista de CES 2025 relaciona el síndrome de Pompe con deficiencia de ¿qué enzima?",
+    "desc": "La fuente aporta una respuesta breve, sin desarrollo del caso.",
+    "options": [
+      "Alfa-glucosidasa ácida",
+      "Glucosa-6-fosfatasa",
+      "Fenilalanina hidroxilasa",
+      "Hexosaminidasa A"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento de pistas propone alfa-glucosidasa ácida. Se conserva como respuesta extraída de la fuente; verificar bibliografía y contexto antes de usarla en evaluación formal.",
+    "hint": "Piensa en una enzima lisosomal implicada en la degradación del glucógeno.",
+    "verified": true,
+    "warning": true
+  },
+  {
+    "id": "p25-03",
+    "module": "Clínica",
+    "source": "CES 2025 SOLO PISTAS · p. 1",
+    "sourceShort": "CES 2025 · p. 1",
+    "type": "review",
+    "q": "Una pista clínica pregunta por la arteria relacionada con un cuadro tipo Wallenberg, pero la anotación del archivo es confusa. ¿Cómo debe tratarse esta entrada en el banco definitivo?",
+    "desc": "Esta pregunta evalúa el manejo responsable de una fuente incompleta; no pretende establecer una respuesta clínica.",
+    "options": [
+      "Marcarla pendiente de verificación y revisar una fuente fiable",
+      "Asignarle una respuesta definitiva sin comprobarla",
+      "Eliminar la referencia a la fuente",
+      "Presentarla como pregunta oficial confirmada"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La anotación de la pista contiene texto ambiguo. Debe conservarse la trazabilidad y dejarse pendiente de verificación antes de convertirla en una pregunta clínica calificable.",
+    "hint": "Cuando una nota no permite reconstruir con seguridad el enunciado o la clave, prioriza la calidad del banco.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "pilot-cg-001",
+    "module": "Cultura general",
+    "source": "Pregunta elaborada para aprendizaje; relacionada temáticamente con CES 2009 Q22. Referencia: https://www.britannica.com/topic/Don-Giovanni-opera-by-Mozart",
+    "sourceShort": "ELABORADA · cultura",
+    "type": "single",
+    "q": "¿Quién compuso la música de la ópera «Don Giovanni»?",
+    "desc": "Pregunta elaborada para aprendizaje; no es una transcripción literal del banco original.",
+    "options": [
+      "Wolfgang Amadeus Mozart",
+      "Ludwig van Beethoven",
+      "Giuseppe Verdi",
+      "Richard Wagner"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "Wolfgang Amadeus Mozart compuso la música de la ópera. El libreto fue escrito por Lorenzo Da Ponte, por lo que conviene distinguir compositor y libretista.",
+    "hint": "Distingue al compositor musical de la persona que escribió el libreto.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cg-004",
+    "module": "Cultura general",
+    "source": "Pregunta elaborada; relacionada con CES 2010 Q25. Referencia: https://www.nobelprize.org/prizes/literature/2009/summary/",
+    "sourceShort": "ELABORADA · cultura",
+    "type": "single",
+    "q": "¿Quién recibió el Premio Nobel de Literatura en 2009?",
+    "desc": "Pregunta factual con año explícito.",
+    "options": [
+      "Herta Müller",
+      "Olga Tokarczuk",
+      "Annie Ernaux",
+      "Svetlana Alexievich"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "Herta Müller recibió el Premio Nobel de Literatura de 2009.",
+    "hint": "Es una escritora nacida en Rumanía, de lengua alemana.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cg-005",
+    "module": "Cultura general",
+    "source": "Pregunta elaborada; relacionada con CES 2010 Q26. Referencia: https://en.chateauversailles.fr/discover/history/great-characters/louis-xiv",
+    "sourceShort": "ELABORADA · cultura",
+    "type": "single",
+    "q": "¿A qué monarca francés se conoce como el «Rey Sol»?",
+    "desc": "Pregunta de historia europea reformulada.",
+    "options": [
+      "Luis XIV",
+      "Luis XVI",
+      "Napoleón Bonaparte",
+      "Francisco I"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El sobrenombre «Rey Sol» se asocia con Luis XIV de Francia.",
+    "hint": "Su reinado estuvo estrechamente asociado con el Palacio de Versalles.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cg-007",
+    "module": "Cultura general",
+    "source": "Pregunta elaborada; relacionada con CES 2010 Q16. Referencia: https://www.louvre.fr/en/explore/the-palace/liberty-leading-the-people",
+    "sourceShort": "ELABORADA · cultura",
+    "type": "single",
+    "q": "¿Quién pintó «La libertad guiando al pueblo» (1830)?",
+    "desc": "Pregunta textual; no incluye ni reproduce la imagen de la obra.",
+    "options": [
+      "Eugène Delacroix",
+      "Édouard Manet",
+      "Claude Monet",
+      "Jacques-Louis David"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La pintura «La libertad guiando al pueblo», de 1830, se atribuye a Eugène Delacroix.",
+    "hint": "Es un pintor francés asociado al Romanticismo.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cb-001",
+    "module": "Ciencias básicas",
+    "source": "Pregunta elaborada y reformulada a partir del tema de CES 2010 ciencias básicas Q5. Referencia: https://www.ncbi.nlm.nih.gov/books/NBK26887/",
+    "sourceShort": "ELABORADA · ciencias",
+    "type": "single",
+    "q": "Durante la transcripción, ¿qué molécula sirve como molde para sintetizar ARN?",
+    "desc": "Reformula una pregunta fuente ambigua para evaluar un concepto definido.",
+    "options": [
+      "Una cadena de ADN",
+      "Una proteína ribosomal",
+      "Un lípido de membrana",
+      "Un aminoácido libre"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La ARN polimerasa utiliza una cadena de ADN como molde para sintetizar ARN.",
+    "hint": "La transcripción copia información genética almacenada en el ADN.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cb-002",
+    "module": "Ciencias básicas",
+    "source": "Pregunta elaborada y ampliada a partir de CES 2010 ciencias básicas Q7. Referencia: https://www.genome.gov/genetics-glossary/Primer",
+    "sourceShort": "ELABORADA · ciencias",
+    "type": "single",
+    "q": "¿Qué función cumple un cebador durante la síntesis de ADN?",
+    "desc": "La pregunta añade el concepto funcional que no aparece en la definición breve de la fuente.",
+    "options": [
+      "Proporciona un extremo 3′-OH para que la polimerasa extienda la cadena",
+      "Rompe todos los enlaces fosfodiéster del ADN",
+      "Traduce el ARN mensajero en proteína",
+      "Impide permanentemente la unión de la polimerasa"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El cebador proporciona un extremo 3′-OH desde el que la ADN polimerasa puede extender la nueva cadena. En PCR se suelen usar cebadores de ADN; durante la replicación celular los cebadores suelen ser de ARN.",
+    "hint": "La polimerasa necesita un extremo químico desde el cual añadir nucleótidos.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cb-003",
+    "module": "Ciencias básicas",
+    "source": "Pregunta elaborada con definición corregida frente a la simplificación del banco CES 2010 ciencias básicas Q1. Referencia: https://www.genome.gov/genetics-glossary/Pseudogene",
+    "sourceShort": "ELABORADA · ciencias",
+    "type": "single",
+    "q": "¿Cuál es la descripción más adecuada de un pseudogén?",
+    "desc": "La respuesta evita equiparar automáticamente pseudogén con secuencia que nunca se transcribe.",
+    "options": [
+      "Una secuencia relacionada con un gen que ha perdido la capacidad de producir un producto funcional",
+      "Un orgánulo que sintetiza ATP",
+      "Una proteína que copia ARN en ADN",
+      "Una región que siempre codifica una proteína funcional"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "Un pseudogén es una secuencia relacionada con un gen que ha perdido la capacidad de producir un producto funcional. Algunos pseudogenes pueden transcribirse; por eso «no se expresa» no es una definición universal.",
+    "hint": "Piensa en una secuencia parecida a un gen funcional, pero que perdió su función original.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cb-004",
+    "module": "Ciencias básicas",
+    "source": "Pregunta elaborada a partir de una pista de CES 2025 SOLO PISTAS; no es pregunta literal. Referencia: https://medlineplus.gov/genetics/condition/pompe-disease/",
+    "sourceShort": "ELABORADA · ciencias",
+    "type": "single",
+    "q": "La enfermedad de Pompe se asocia con deficiencia de ¿qué enzima?",
+    "desc": "Asociación educativa de bioquímica/genética; no representa una evaluación clínica completa.",
+    "options": [
+      "Alfa-glucosidasa ácida lisosomal (GAA)",
+      "Fenilalanina hidroxilasa",
+      "Glucosa-6-fosfatasa",
+      "Hexosaminidasa A"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La enfermedad de Pompe se debe a deficiencia de alfa-glucosidasa ácida lisosomal (GAA), que participa en la degradación del glucógeno dentro de los lisosomas.",
+    "hint": "Es una enzima lisosomal relacionada con el metabolismo del glucógeno.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "pilot-cb-005",
+    "module": "Ciencias básicas",
+    "source": "Pregunta elaborada como asociación educativa a partir de CES 2025 SOLO PISTAS. Referencia: https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/",
+    "sourceShort": "ELABORADA · ciencias",
+    "type": "single",
+    "q": "¿Qué deficiencia vitamínica puede asociarse con anemia y manifestaciones neurológicas?",
+    "desc": "Asociación de estudio, no criterio suficiente para diagnosticar una persona real.",
+    "options": [
+      "Vitamina B12",
+      "Vitamina C",
+      "Vitamina K",
+      "Vitamina E"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La deficiencia de vitamina B12 puede asociarse con anemia y alteraciones neurológicas. La asociación aislada no confirma un diagnóstico; la valoración clínica requiere contexto y pruebas apropiadas.",
+    "hint": "Considera una vitamina importante para la formación normal de células sanguíneas y la función neurológica.",
+    "verified": true,
+    "warning": false
+  },
+  {
+    "id": "src09-03",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 3, PDF p. 1. Respuesta indicada por la fuente: Platón. Distractores elaborados para el prototipo.",
+    "sourceShort": "CES 2009 · P3",
+    "type": "single",
+    "q": "¿Quién escribió «La República», según el banco CES 2009?",
+    "desc": "Enunciado basado en el banco original; las opciones incorrectas se añadieron para práctica.",
+    "options": [
+      "Platón",
+      "Aristóteles",
+      "Sócrates",
+      "Heródoto"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco CES 2009 indica a Platón como autor de «La República». Esta pregunta conserva la respuesta de la fuente; los distractores son editoriales.",
+    "hint": "Fue discípulo de Sócrates y maestro de Aristóteles.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-04",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 6, PDF p. 3. Respuesta indicada por la fuente: Francisco José de Goya y Lucientes. No se incluye la imagen original.",
+    "sourceShort": "CES 2009 · P6 · imagen omitida",
+    "type": "single",
+    "q": "¿Quién pintó «Los fusilamientos del Tres de Mayo», según el banco CES 2009?",
+    "desc": "Versión textual de una pregunta visual; no se ha reproducido la imagen del PDF.",
+    "options": [
+      "Francisco de Goya",
+      "Diego Velázquez",
+      "Francisco de Zurbarán",
+      "El Greco"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente atribuye la obra a Francisco José de Goya y Lucientes. La pregunta se ha convertido a formato textual porque la imagen original no está incorporada.",
+    "hint": "Pintor español nacido en Fuendetodos, Zaragoza.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-05",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 9, PDF p. 5. Respuesta indicada por la fuente: Sandro Botticelli. No se reproduce la imagen de la obra.",
+    "sourceShort": "CES 2009 · P9 · imagen omitida",
+    "type": "single",
+    "q": "¿Quién pintó «El nacimiento de Venus», según el banco CES 2009?",
+    "desc": "Pregunta textual basada en la respuesta del documento original.",
+    "options": [
+      "Sandro Botticelli",
+      "Leonardo da Vinci",
+      "Rafael Sanzio",
+      "Tiziano"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco atribuye «El nacimiento de Venus» a Sandro Botticelli. No se utiliza la imagen original en este prototipo.",
+    "hint": "Pintor del Renacimiento florentino.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-06",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 10, PDF p. 5–6. La fuente identifica «Mujer, pájaro y estrella» como obra de Joan Miró y la presenta como excepción entre obras de Dalí.",
+    "sourceShort": "CES 2009 · P10",
+    "type": "single",
+    "q": "Según el banco CES 2009, ¿cuál de estas obras se identifica como obra de Joan Miró y no de Salvador Dalí?",
+    "desc": "Se conserva la intención de la pregunta fuente; las opciones se presentan en texto.",
+    "options": [
+      "Mujer, pájaro y estrella",
+      "La persistencia de la memoria",
+      "La tentación de San Antonio",
+      "Galatea de las esferas"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente indica que «Mujer, pájaro y estrella» es de Joan Miró y la presenta como la excepción entre las obras enumeradas de Salvador Dalí.",
+    "hint": "El artista correcto es un pintor español asociado al surrealismo, pero no es Dalí.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-07",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 11, PDF p. 7. Respuesta indicada por la fuente: Madrid, España.",
+    "sourceShort": "CES 2009 · P11",
+    "type": "single",
+    "q": "¿En qué ciudad se encuentra el Museo del Prado, según el banco CES 2009?",
+    "desc": "Pregunta factual reconstruida a partir del enunciado original.",
+    "options": [
+      "Madrid",
+      "Barcelona",
+      "Sevilla",
+      "Valencia"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco CES 2009 indica Madrid, España.",
+    "hint": "Es la capital de España.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-08",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 12, PDF p. 7. La fuente marca como falso que La flauta mágica sea de Verdi y la atribuye a Mozart.",
+    "sourceShort": "CES 2009 · P12",
+    "type": "single",
+    "q": "¿Quién compuso «La flauta mágica», según el banco CES 2009?",
+    "desc": "La fuente original plantea una afirmación de verdadero/falso; aquí se convierte a pregunta de autoría.",
+    "options": [
+      "Wolfgang Amadeus Mozart",
+      "Giuseppe Verdi",
+      "Richard Wagner",
+      "Johann Sebastian Bach"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento señala que la afirmación «La flauta mágica es de Verdi» es falsa y atribuye la obra a Wolfgang Amadeus Mozart.",
+    "hint": "Compositor austríaco del siglo XVIII, autor también de «Don Giovanni».",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-09",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 15, PDF p. 10. Respuesta indicada por la fuente: Gardiner Greene Hubbard.",
+    "sourceShort": "CES 2009 · P15",
+    "type": "single",
+    "q": "¿A quién identifica el banco CES 2009 como fundador de la National Geographic Society?",
+    "desc": "Se mantiene explícita la atribución que aparece en el material de origen.",
+    "options": [
+      "Gardiner Greene Hubbard",
+      "Alexander Graham Bell",
+      "Gilbert Hovey Grosvenor",
+      "John Wesley Powell"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco original indica a Gardiner Greene Hubbard. La pregunta mantiene la respuesta fuente y queda sujeta a revisión independiente antes de evaluación formal.",
+    "hint": "Fue el primer presidente de la sociedad fundada en 1888.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-10",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 17, PDF p. 11. Respuesta indicada por la fuente: Inglaterra; el texto ubica su nacimiento en Londres.",
+    "sourceShort": "CES 2009 · P17",
+    "type": "single",
+    "q": "¿En qué país nació Charles Chaplin, según el banco CES 2009?",
+    "desc": "Se conserva la respuesta geográfica del documento; los distractores son editoriales.",
+    "options": [
+      "Inglaterra",
+      "Suiza",
+      "Francia",
+      "Estados Unidos"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente responde Inglaterra y especifica Londres como lugar de nacimiento de Charles Chaplin.",
+    "hint": "Londres es la capital de este país del Reino Unido.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-11",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 22, PDF p. 13. Respuesta indicada por la fuente: Tomás Carrasquilla.",
+    "sourceShort": "CES 2009 · P22",
+    "type": "single",
+    "q": "¿Qué escritor colombiano cumplió 150 años en 2008, según el banco CES 2009?",
+    "desc": "La edad se calcula a partir del año de nacimiento que figura en el documento.",
+    "options": [
+      "Tomás Carrasquilla",
+      "José Asunción Silva",
+      "Jorge Isaacs",
+      "Tomás González"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco identifica a Tomás Carrasquilla, nacido en 1858; por eso cumplía 150 años en 2008.",
+    "hint": "Escritor antioqueño nacido en Santo Domingo.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-12",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 24, PDF p. 15. Respuesta indicada por la fuente: celos.",
+    "sourceShort": "CES 2009 · P24",
+    "type": "single",
+    "q": "¿Qué tema destaca el banco CES 2009 en relación con «Otelo», de Shakespeare?",
+    "desc": "La pregunta conserva la interpretación resumida que ofrece la fuente.",
+    "options": [
+      "Los celos",
+      "La exploración espacial",
+      "La fundación de Roma",
+      "La vida de Alejandro Magno"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente asocia «Otelo» con los celos, en particular los celos de Otelo vinculados a las acciones de Yago.",
+    "hint": "Es una emoción central en el conflicto trágico de la obra.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-13",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 28, PDF p. 15. La propia fuente atribuye la construcción a Semíramis «según las leyendas griegas».",
+    "sourceShort": "CES 2009 · P28 · leyenda",
+    "type": "single",
+    "q": "¿A quién atribuye la tradición mencionada en el banco CES 2009 la construcción de los jardines colgantes de Babilonia?",
+    "desc": "Se pregunta por la atribución legendaria de la fuente, no por un hecho histórico demostrado.",
+    "options": [
+      "Semíramis",
+      "Cleopatra",
+      "Hipatia",
+      "Aspasia"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento atribuye los jardines a Semíramis, pero lo presenta como una tradición legendaria. La respuesta no debe interpretarse como confirmación histórica de su existencia o autoría.",
+    "hint": "La fuente la describe como una reina de la antigua Asiria.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-14",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 29, PDF p. 15. Respuesta indicada por la fuente: Estados Unidos de América.",
+    "sourceShort": "CES 2009 · P29",
+    "type": "single",
+    "q": "¿En qué país tuvo lugar la Guerra de Secesión mencionada en el banco CES 2009?",
+    "desc": "Pregunta factual basada en el enunciado del documento.",
+    "options": [
+      "Estados Unidos de América",
+      "Francia",
+      "España",
+      "México"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco indica que la Guerra de Secesión ocurrió en Estados Unidos de América.",
+    "hint": "El conflicto enfrentó a la Unión y a la Confederación en el siglo XIX.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-03",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 7, PDF p. 3. Respuesta indicada por la fuente: Immanuel Kant. El título aparece abreviado como «crítica a la razón».",
+    "sourceShort": "CES 2010 · P7",
+    "type": "single",
+    "q": "¿Qué filósofo identifica el banco CES 2010 como autor de «Crítica a la razón»?",
+    "desc": "El título del documento es abreviado; no se ha supuesto si se refiere a «Crítica de la razón pura» u otra obra de Kant.",
+    "options": [
+      "Immanuel Kant",
+      "Georg Wilhelm Friedrich Hegel",
+      "René Descartes",
+      "David Hume"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente responde Immanuel Kant, pero el título de la obra está abreviado en el documento. Conviene recuperar el enunciado exacto antes de usarla como pregunta formal.",
+    "hint": "Filósofo prusiano de la Ilustración.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-04",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 11, PDF p. 4. Respuesta indicada por la fuente: Biblioteca de Alejandría.",
+    "sourceShort": "CES 2010 · P11",
+    "type": "single",
+    "q": "¿Qué biblioteca histórica nombra el banco CES 2010 al preguntar por una biblioteca que fue quemada?",
+    "desc": "Se pregunta por el nombre que figura en la fuente; su explicación histórica requiere revisión.",
+    "options": [
+      "Biblioteca de Alejandría",
+      "Biblioteca del Congreso",
+      "Biblioteca de Pérgamo",
+      "Biblioteca Vaticana"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento responde «Biblioteca de Alejandría». La narración sobre su destrucción es simplificada y discutida históricamente; se conserva aquí la respuesta fuente sin validar todos los detalles de la explicación original.",
+    "hint": "Estaba en la antigua ciudad de Alejandría, en Egipto.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-05",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 12, PDF p. 4. Respuesta indicada por la fuente: Declaración de los Derechos del Hombre y del Ciudadano.",
+    "sourceShort": "CES 2010 · P12",
+    "type": "single",
+    "q": "¿Qué declaración menciona el banco CES 2010 en relación con la Revolución francesa?",
+    "desc": "Enunciado reformulado para preguntar por el documento citado en la fuente.",
+    "options": [
+      "Declaración de los Derechos del Hombre y del Ciudadano",
+      "Carta Magna",
+      "Declaración de Independencia de Estados Unidos",
+      "Edicto de Milán"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco cita la Declaración de los Derechos del Hombre y del Ciudadano como documento asociado a la Revolución francesa.",
+    "hint": "Su título menciona los derechos del hombre y del ciudadano.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-06",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 14, PDF p. 5. Respuesta indicada por la fuente: Miguel de Cervantes Saavedra; la fuente contiene la expresión «Manco del Lepanto».",
+    "sourceShort": "CES 2010 · P14",
+    "type": "single",
+    "q": "¿A qué escritor identifica el banco CES 2010 en la pregunta que usa la expresión «Manco del Lepanto»?",
+    "desc": "Se conserva la expresión del documento fuente para evitar corregir silenciosamente el original.",
+    "options": [
+      "Miguel de Cervantes Saavedra",
+      "Lope de Vega",
+      "Francisco de Quevedo",
+      "Calderón de la Barca"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento identifica a Miguel de Cervantes Saavedra. La expresión del enunciado fuente se conserva en esta versión y debería revisarse editorialmente antes de publicar.",
+    "hint": "Es el autor de «Don Quijote de la Mancha».",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-07",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 18, PDF p. 6. Respuesta indicada por la fuente: Felix Mendelssohn.",
+    "sourceShort": "CES 2010 · P18",
+    "type": "single",
+    "q": "¿Quién compuso la conocida marcha nupcial asociada con «Sueño de una noche de verano», según el banco CES 2010?",
+    "desc": "Pregunta basada en el contenido del documento, con distractores añadidos para practicar.",
+    "options": [
+      "Felix Mendelssohn",
+      "Frédéric Chopin",
+      "Johann Sebastian Bach",
+      "Giuseppe Verdi"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento atribuye a Felix Mendelssohn la música relacionada con «Sueño de una noche de verano» y su marcha nupcial.",
+    "hint": "Compositor alemán del período romántico.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-08",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 19, PDF p. 6. Respuesta indicada por la fuente: 9 de noviembre de 1989.",
+    "sourceShort": "CES 2010 · P19",
+    "type": "single",
+    "q": "¿Qué fecha da el banco CES 2010 para la caída del Muro de Berlín?",
+    "desc": "Se conserva la fecha explícita de la fuente.",
+    "options": [
+      "9 de noviembre de 1989",
+      "3 de octubre de 1990",
+      "13 de agosto de 1961",
+      "1 de enero de 1989"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente indica el 9 de noviembre de 1989 como fecha de la caída del Muro de Berlín.",
+    "hint": "Ocurrió antes de la reunificación alemana de 1990.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-09",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 23, PDF p. 7. Respuesta indicada por la fuente: exploración y estudio de las cuevas.",
+    "sourceShort": "CES 2010 · P23",
+    "type": "single",
+    "q": "¿Qué estudia la espeleología, según el banco CES 2010?",
+    "desc": "Pregunta definicional basada en el texto del documento.",
+    "options": [
+      "La exploración y el estudio de las cuevas",
+      "Las monedas y medallas",
+      "Los hongos",
+      "Los terremotos"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento define la espeleología como exploración y estudio de las cuevas o cavidades subterráneas.",
+    "hint": "La palabra está relacionada con cavidades subterráneas.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-10",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 27, PDF p. 8. Respuesta indicada por la fuente: diosa de la sabiduría.",
+    "sourceShort": "CES 2010 · P27",
+    "type": "single",
+    "q": "¿Qué representa Minerva según la tabla mitológica incluida en el banco CES 2010?",
+    "desc": "Se conserva la asociación mitológica que aparece en el documento.",
+    "options": [
+      "La sabiduría",
+      "El mar",
+      "El matrimonio",
+      "El inframundo"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente identifica a Minerva con la sabiduría. La tabla del documento relaciona divinidades romanas y griegas, aunque algunas filas y equivalencias requieren revisión.",
+    "hint": "Se asocia con la inteligencia y el conocimiento.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-11",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 29, PDF p. 9. Respuesta indicada por la fuente: palma de cera.",
+    "sourceShort": "CES 2010 · P29",
+    "type": "single",
+    "q": "¿Cuál es el árbol nacional de Colombia según el banco CES 2010?",
+    "desc": "Pregunta factual reconstruida a partir de la respuesta indicada por el documento.",
+    "options": [
+      "Palma de cera del Quindío",
+      "Ceiba",
+      "Guayacán amarillo",
+      "Roble andino"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente responde «palma de cera» y especifica la palma de cera del Quindío.",
+    "hint": "Es un símbolo nacional asociado con el departamento del Quindío.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-03",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 2. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 2",
+    "type": "single",
+    "q": "¿Qué filósofo escribió «La República»?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Platón",
+      "Aristóteles",
+      "Sócrates",
+      "Epicuro"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco atribuye «La República» a Platón.",
+    "hint": "Cultura filosófica: autor de un diálogo político y filosófico.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-04",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 7. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 7",
+    "type": "single",
+    "q": "¿En qué museo de Madrid se encuentra una importante colección de obras de Velázquez y Goya, según el contexto del banco?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Museo del Prado",
+      "Museo del Louvre",
+      "Museos Vaticanos",
+      "Museo Británico"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La referencia del documento es el Museo del Prado.",
+    "hint": "El museo está en Madrid.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-05",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 7. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 7",
+    "type": "single",
+    "q": "¿Quién compuso la ópera «La flauta mágica»?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Wolfgang Amadeus Mozart",
+      "Giuseppe Verdi",
+      "Richard Wagner",
+      "Gioachino Rossini"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento relaciona «La flauta mágica» con Mozart.",
+    "hint": "Ópera estrenada en 1791.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-06",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 8. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 8",
+    "type": "single",
+    "q": "¿En qué países se encuentra la cuenca del río Danubio?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "En varios países europeos",
+      "Solo en Alemania",
+      "Solo en Austria",
+      "Solo en Hungría"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El Danubio atraviesa o bordea varios países europeos; no pertenece a un único país.",
+    "hint": "Es uno de los grandes ríos internacionales de Europa.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-07",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 8. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 8",
+    "type": "single",
+    "q": "¿Por qué se recuerda a Robert Koch en la historia de la microbiología?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Por sus aportes a la bacteriología y los agentes causantes de enfermedades",
+      "Por formular la teoría heliocéntrica",
+      "Por descubrir la penicilina",
+      "Por crear la tabla periódica"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco incluye a Robert Koch; sus aportes se relacionan con la bacteriología y la identificación de microorganismos causantes de enfermedades.",
+    "hint": "Se asocia con los postulados de Koch.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-09",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 11. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 11",
+    "type": "single",
+    "q": "¿En qué ciudad nació Charlie Chaplin?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Londres",
+      "París",
+      "Nueva York",
+      "Dublín"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco sitúa el nacimiento de Chaplin en Londres, Inglaterra.",
+    "hint": "Actor y cineasta británico del cine mudo.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-10",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 13. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 13",
+    "type": "single",
+    "q": "¿Qué escritor colombiano aparece asociado a la pregunta sobre su aniversario en 2008?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Tomás Carrasquilla",
+      "Jorge Isaacs",
+      "José Asunción Silva",
+      "Rafael Pombo"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona a Tomás Carrasquilla en relación con un aniversario en 2008.",
+    "hint": "Escritor antioqueño, autor de «La marquesa de Yolombó».",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-11",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 14. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 14",
+    "type": "single",
+    "q": "¿Qué obra de Shakespeare aparece asociada con el tema de los celos?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Otelo",
+      "Hamlet",
+      "Macbeth",
+      "La tempestad"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento vincula «Otelo» con los celos.",
+    "hint": "La tragedia explora los celos, la manipulación y la confianza.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src09-12",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2009 · p. 14. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2009 · p. 14",
+    "type": "single",
+    "q": "¿En qué guerra civil tuvo lugar la contienda entre la Unión y la Confederación?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Guerra Civil de Estados Unidos",
+      "Guerra de los Cien Años",
+      "Guerra de Crimea",
+      "Guerra de Secesión española"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La referencia corresponde a la Guerra Civil estadounidense (1861–1865).",
+    "hint": "También se conoce como Guerra de Secesión.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-13",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 4. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 4",
+    "type": "single",
+    "q": "¿Qué biblioteca antigua se hizo célebre por reunir textos del mundo antiguo en Alejandría?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "La Biblioteca de Alejandría",
+      "La Biblioteca Vaticana",
+      "La Biblioteca del Congreso",
+      "La Biblioteca de Pérgamo en Roma"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco hace referencia a la Biblioteca de Alejandría.",
+    "hint": "Fue un centro de estudio del mundo helenístico.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-14",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 5. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 5",
+    "type": "single",
+    "q": "¿En qué ciudad belga se encuentra la Universidad de Lovaina mencionada en el banco?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Lovaina",
+      "Brujas",
+      "Gante",
+      "Amberes"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La pregunta del documento sobre cuál es la universidad más antigua tiene criterios ambiguos; este ítem reformula solo la ubicación geográfica del nombre citado.",
+    "hint": "No confundir ubicación con la afirmación de antigüedad.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-15",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 7. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 7",
+    "type": "single",
+    "q": "¿Quién fue Kofi Annan en la Organización de las Naciones Unidas?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Secretario general",
+      "Presidente de la Asamblea General durante toda su carrera",
+      "Fundador de la ONU",
+      "Presidente del Consejo de Seguridad de forma permanente"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El texto explicativo del banco identifica correctamente a Kofi Annan como secretario general; el enunciado original usa de manera imprecisa «presidente de la ONU».",
+    "hint": "Separar el cargo correcto de la formulación defectuosa de la fuente.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-16",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 8. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 8",
+    "type": "single",
+    "q": "¿Qué escritora recibió el Premio Nobel de Literatura en 2009?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Herta Müller",
+      "Nadine Gordimer",
+      "Toni Morrison",
+      "Wisława Szymborska"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente identifica a Herta Müller como laureada en 2009.",
+    "hint": "Premio Nobel de Literatura 2009.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-17",
+    "module": "Cultura general",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 9. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 9",
+    "type": "single",
+    "q": "¿Cuál fue la capital del Imperio mexica conocida como Tenochtitlan?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "México-Tenochtitlan",
+      "Cusco",
+      "Tikal",
+      "Teotihuacán"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco incluye Tenochtitlan; fue la capital mexica en el sitio de la actual Ciudad de México.",
+    "hint": "Distinguirla de otras ciudades mesoamericanas.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-18",
+    "module": "Ciencias básicas",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 10. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 10",
+    "type": "single",
+    "q": "¿Qué describe mejor a la eucromatina?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Cromatina relativamente menos condensada y generalmente más accesible",
+      "ADN exclusivamente mitocondrial",
+      "Proteína que degrada ARN",
+      "Región sin ADN en el núcleo"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La eucromatina suele estar menos condensada y ser más accesible a la maquinaria de transcripción. La relación no es absoluta para todos los genes y tipos celulares.",
+    "hint": "Contrástala con la heterocromatina.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-19",
+    "module": "Ciencias básicas",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 10. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 10",
+    "type": "single",
+    "q": "¿Qué función cumple un cebador (primer) durante la síntesis de ADN?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "Aporta un extremo 3′-OH desde el que una polimerasa puede extender la cadena",
+      "Une dos cromosomas homólogos",
+      "Degrada proteínas recién traducidas",
+      "Sustituye a la ADN polimerasa"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "Un cebador proporciona un extremo 3′-OH necesario para que la ADN polimerasa añada nucleótidos. En replicación celular suele ser ARN; en PCR se emplean cebadores de ADN.",
+    "hint": "La polimerasa no inicia normalmente una cadena desde cero.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "v4-src10-21",
+    "module": "Ciencias básicas",
+    "source": "Banco CES 2009/2010, tema localizado en CES 2010 · p. 10. Enunciado normalizado y distractores editoriales añadidos; requiere revisión de clave antes de evaluación formal.",
+    "sourceShort": "CES 2010 · p. 10",
+    "type": "single",
+    "q": "¿Sobre qué molécula actúa como molde la ARN polimerasa durante la transcripción?",
+    "desc": "Pregunta reconstruida o reformulada a partir del tema del documento; no siempre es una transcripción literal.",
+    "options": [
+      "ADN",
+      "Proteína",
+      "Lípido",
+      "Polisacárido"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "En la transcripción, la ARN polimerasa utiliza una hebra de ADN como molde para sintetizar ARN.",
+    "hint": "No confundir transcripción con traducción.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-01",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 5. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 5",
+    "type": "single",
+    "q": "¿Qué diferencia al transporte activo primario del transporte activo secundario?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "El primario usa directamente energía como ATP; el secundario aprovecha un gradiente electroquímico",
+      "El primario nunca usa energía y el secundario siempre usa ATP directamente",
+      "Ambos ocurren solo por difusión simple",
+      "El secundario transporta únicamente agua"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material distingue el uso directo de energía en el transporte activo primario del aprovechamiento de un gradiente electroquímico en el secundario.",
+    "hint": "Repasa la diferencia entre ATP directo y gradiente.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-02",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 5. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 5",
+    "type": "single",
+    "q": "¿Qué caracteriza a un simporte?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Dos sustancias se desplazan hacia el mismo lado de la membrana",
+      "Dos sustancias se desplazan siempre en direcciones opuestas",
+      "Una sustancia atraviesa la membrana sin transportador",
+      "Solo transporta agua por ósmosis"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento define el simporte como el transporte acoplado de partículas hacia el mismo lado.",
+    "hint": "Contrástalo con antiporte.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-03",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 5. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 5",
+    "type": "single",
+    "q": "¿Qué caracteriza a un antiporte?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "El transporte acoplado de sustancias en direcciones opuestas",
+      "El movimiento de dos sustancias en la misma dirección",
+      "La difusión simple de gases",
+      "La síntesis de ATP en el núcleo"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material describe el antiporte como el movimiento acoplado en lados opuestos de la membrana.",
+    "hint": "Compara dirección de movimiento con simporte.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-04",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 4. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 4",
+    "type": "single",
+    "q": "¿Qué células pulmonares producen el surfactante mencionado en CEM - B?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Neumocitos tipo II",
+      "Neumocitos tipo I exclusivamente",
+      "Macrófagos alveolares",
+      "Células endoteliales"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material asocia el surfactante pulmonar con los neumocitos tipo II.",
+    "hint": "Se relaciona con la reducción de tensión superficial alveolar.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-05",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 6. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 6",
+    "type": "single",
+    "q": "¿Qué patrón de transmisión suele asociarse con variantes patogénicas del ADN mitocondrial?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Herencia materna",
+      "Herencia paterna exclusiva",
+      "Herencia ligada al cromosoma Y",
+      "Siempre herencia autosómica dominante"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento resume la herencia mitocondrial como materna: los hijos pueden heredarla de su madre, pero la transmisión a la descendencia ocurre a través de mujeres.",
+    "hint": "Distingue herencia mitocondrial de herencia nuclear.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-06",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 11. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 11",
+    "type": "single",
+    "q": "¿Qué expresa un ΔG negativo para una reacción?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "La reacción libera energía libre y es exergónica",
+      "La reacción requiere siempre aporte neto de energía libre",
+      "La reacción no puede ocurrir",
+      "La reacción necesariamente produce proteínas"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material relaciona ΔG negativo con liberación de energía libre y reacción exergónica.",
+    "hint": "Recuerda ΔG = energía libre de productos menos reactivos.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-07",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 16. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 16",
+    "type": "single",
+    "q": "¿Qué vitamina se relaciona con el síndrome de Wernicke-Korsakoff en el material?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Vitamina B1 (tiamina)",
+      "Vitamina B12",
+      "Vitamina C",
+      "Vitamina K"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "CEM - B relaciona el cuadro con deficiencia de vitamina B1. Es una asociación académica; la valoración clínica real requiere profesionales de salud.",
+    "hint": "El documento menciona alcoholismo crónico como contexto típico.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-08",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 21. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 21",
+    "type": "single",
+    "q": "¿Qué evalúan principalmente el tiempo de protrombina (TP) y el TTPa según el resumen del material?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "TP: vía extrínseca y común; TTPa: vía intrínseca y común",
+      "TP: solo vía intrínseca; TTPa: solo vía extrínseca",
+      "Ambos miden únicamente plaquetas",
+      "Ambos miden exclusivamente fibrinólisis"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento resume TP para vía extrínseca y común, y TTPa para vía intrínseca y común. La interpretación clínica depende del contexto y del laboratorio.",
+    "hint": "Asocia cada prueba con su vía de coagulación.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-09",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 21. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 21",
+    "type": "single",
+    "q": "¿Cuál de estos fármacos se describe como inhibidor directo de la trombina (factor IIa)?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Dabigatrán",
+      "Rivaroxabán",
+      "Apixabán",
+      "Warfarina"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material identifica dabigatrán como inhibidor directo de trombina; rivaroxabán y apixabán se describen como inhibidores del factor Xa.",
+    "hint": "No confundir IIa con Xa.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-10",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 26. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 26",
+    "type": "single",
+    "q": "¿Qué hormona estimula principalmente la glucogenogénesis en el resumen de CEM - B?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Insulina",
+      "Glucagón",
+      "Adrenalina exclusivamente",
+      "Calcitonina"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento señala la glucogenogénesis como proceso anabólico estimulado por insulina.",
+    "hint": "Contrasta almacenamiento de glucógeno con glucogenólisis.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-11",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 26. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 26",
+    "type": "single",
+    "q": "¿Qué enlaces se asocian con la estructura ramificada del glucógeno?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Enlaces α(1→4) en cadenas y α(1→6) en ramificaciones",
+      "Solo enlaces β(1→4)",
+      "Enlaces peptídicos y disulfuro",
+      "Puentes de hidrógeno como único enlace covalente"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material indica uniones 1→4 en las cadenas y 1→6 en los puntos de ramificación.",
+    "hint": "Distingue alargamiento y ramificación.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-12",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 31. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 31",
+    "type": "single",
+    "q": "¿Qué enzima deficiente se relaciona con la enfermedad de Tay-Sachs?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Hexosaminidasa A",
+      "Glucocerebrosidasa",
+      "Alfa-glucosidasa ácida",
+      "Fenilalanina hidroxilasa"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material asocia Tay-Sachs con deficiencia de hexosaminidasa A y acumulación de gangliósido GM2.",
+    "hint": "Es un trastorno de almacenamiento lisosomal.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-13",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 31. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 31",
+    "type": "single",
+    "q": "¿Qué sustancia se acumula en la enfermedad de Gaucher según el material?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Glucocerebrósido",
+      "Gangliósido GM2",
+      "Esfingomielina por deficiencia de esfingomielinasa",
+      "Glucógeno exclusivamente muscular"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "CEM - B relaciona Gaucher con acumulación de glucocerebrósido por deficiencia de glucocerebrosidasa.",
+    "hint": "No confundir con Tay-Sachs.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-14",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 41. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 41",
+    "type": "single",
+    "q": "¿Qué enzima sintetiza los cebadores durante la replicación del ADN, según el material?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "Primasa",
+      "Helicasa",
+      "Ligasa exclusivamente",
+      "Topoisomerasa"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento atribuye a la primasa la síntesis de los primers; luego la ADN polimerasa extiende la cadena.",
+    "hint": "El cebador aporta el extremo desde el que se extiende ADN.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "cemv5-15",
+    "module": "Ciencias básicas",
+    "source": "CEM - B · p. 76. Pregunta elaborada a partir del contenido temático; no es transcripción literal del documento. Requiere validación académica independiente.",
+    "sourceShort": "CEM - B · p. 76",
+    "type": "single",
+    "q": "¿Qué componentes forman el complejo de ataque a membrana del complemento?",
+    "desc": "Ítem didáctico elaborado para practicar un concepto del material CEM - B.",
+    "options": [
+      "C5 a C9",
+      "C1 a C3 exclusivamente",
+      "Solo C3a y C5a",
+      "IgE e histamina"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El material identifica C5, C6, C7, C8 y C9 como componentes del complejo de ataque a membrana.",
+    "hint": "C3a y C5a se describen como anafilotoxinas; C3b como opsonina.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-15",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta sobre National Geographic Society, PDF p. 10",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Quién aparece en el banco CES 2009 como fundador de la National Geographic Society?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Gardiner Greene Hubbard",
+      "Alexander Graham Bell",
+      "David Livingstone",
+      "Henry Morton Stanley"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente identifica a Gardiner Greene Hubbard. Se conserva como respuesta indicada por el documento; distractores elaborados editorialmente.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-17",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta sobre Tomás Carrasquilla, PDF p. 13",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Qué escritor colombiano menciona el banco CES 2009 al hablar de los 150 años de su nacimiento en 2008?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Tomás Carrasquilla",
+      "Jorge Isaacs",
+      "José Eustasio Rivera",
+      "Rafael Pombo"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona a Tomás Carrasquilla. Se conserva el marco temporal del documento original.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-18",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta sobre Otelo, PDF p. 14",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "En la tragedia «Otelo», ¿qué emoción tiene un papel central en el conflicto del protagonista?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Los celos",
+      "La avaricia",
+      "La nostalgia",
+      "La ambición científica"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco relaciona «Otelo» con los celos. Los distractores son editoriales.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-19",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta sobre la Guerra Civil de Estados Unidos, PDF p. 15",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿En qué país ocurrió la Guerra Civil estadounidense mencionada en el banco CES 2009?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Estados Unidos",
+      "México",
+      "Canadá",
+      "Brasil"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente se refiere a la Guerra Civil de Estados Unidos. El ítem pregunta únicamente por el país, sin añadir fechas o causas no solicitadas por la fuente.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-13",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta sobre la Biblioteca de Alejandría, PDF p. 4",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿En qué ciudad de la Antigüedad se encontraba la célebre biblioteca mencionada en el banco?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Alejandría",
+      "Atenas",
+      "Roma",
+      "Pérgamo"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona la Biblioteca de Alejandría. Las opciones incorrectas se elaboraron para el prototipo.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-15",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta sobre Miguel de Cervantes, PDF p. 5",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Qué escritor español es conocido como «el manco de Lepanto»?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Miguel de Cervantes",
+      "Lope de Vega",
+      "Francisco de Quevedo",
+      "Calderón de la Barca"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente alude a Miguel de Cervantes mediante el sobrenombre histórico. Las opciones incorrectas son editoriales.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-17",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta sobre Tenochtitlan, PDF p. 9",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Qué ciudad fue la capital del Imperio mexica y es antecedente histórico de la actual Ciudad de México?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Tenochtitlan",
+      "Cuzco",
+      "Tikal",
+      "Chichén Itzá"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona Tenochtitlan. Las opciones se han elaborado para permitir práctica de selección única.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-19",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta sobre Verdi, PDF p. 6",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Quién compuso la ópera «La traviata»?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Giuseppe Verdi",
+      "Giacomo Puccini",
+      "Gioachino Rossini",
+      "Gaetano Donizetti"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco asocia «La traviata» con Giuseppe Verdi. Pregunta reconstruida en formato textual.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-20",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta sobre el Premio Nobel de Literatura 2009, PDF p. 8",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Quién recibió el Premio Nobel de Literatura en 2009, según el banco CES 2010?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Herta Müller",
+      "Mario Vargas Llosa",
+      "Orhan Pamuk",
+      "Doris Lessing"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente señala a Herta Müller. Se recomienda actualizar y validar periódicamente las preguntas de premios y fechas.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-21",
+    "module": "Ciencias básicas",
+    "source": "Banco examen CES 2010, ciencias básicas, PDF p. 10; reformulación editorial",
+    "sourceShort": "CES 2009/2010 · revisar",
+    "type": "single",
+    "q": "¿Qué estructura celular organiza el ensamblaje de los microtúbulos del huso y sirve de región de unión de las cromátidas hermanas?",
+    "desc": "Reconstrucción textual basada en el tema localizado en el banco original. Los distractores son editoriales; no se conserva una imagen original en esta versión.",
+    "options": [
+      "Centrómero",
+      "Nucléolo",
+      "Lisosoma",
+      "Peroxisoma"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "Este ítem se ha redactado como pregunta conceptual asociada al tema del centrómero. El centrómero es una región del cromosoma; el cinetocoro es el complejo proteico donde se unen los microtúbulos. No es una transcripción literal de la pregunta fuente.",
+    "hint": "Lee el tema y contrasta la respuesta con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-20",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, bloque de cultura general, referencia a Mozart y La flauta mágica; reconstrucción temática.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué ópera de Wolfgang Amadeus Mozart aparece mencionada en el banco CES 2009?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "La flauta mágica",
+      "La traviata",
+      "Carmen",
+      "Aida"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente relaciona a Mozart con La flauta mágica. Las opciones incorrectas son editoriales.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-21",
+    "module": "Geografía",
+    "source": "Banco examen CES 2009, preguntas de geografía sobre el Danubio; reconstrucción temática.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué río europeo aparece mencionado en el banco CES 2009 y atraviesa o bordea varias capitales europeas?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "El Danubio",
+      "El Tajo",
+      "El Po",
+      "El Loira"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona el Danubio. El enunciado se ha normalizado y los distractores son editoriales.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src09-22",
+    "module": "Historia",
+    "source": "Banco examen CES 2009, PDF p. 15; tema recuperado en lote anterior.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué conflicto bélico de Estados Unidos se menciona en el banco CES 2009?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "La Guerra Civil estadounidense",
+      "La guerra de 1812",
+      "La guerra hispano-estadounidense",
+      "La guerra de Corea"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona la Guerra Civil de Estados Unidos. Este ítem es una variante temática y no debe contarse como contenido nuevo independiente de src09-19.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-22",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, PDF p. 7, término “speleology/espeleología”; reconstrucción textual.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué disciplina estudia las cuevas y cavidades subterráneas?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "La espeleología",
+      "La paleografía",
+      "La heráldica",
+      "La numismática"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La espeleología estudia las cavidades subterráneas. Se normaliza la grafía al español.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-23",
+    "module": "Historia",
+    "source": "Banco examen CES 2010, PDF p. 8, referencia a Louis XIV; reconstrucción textual.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué monarca francés es conocido tradicionalmente como el Rey Sol?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "Luis XIV",
+      "Luis XVI",
+      "Francisco I",
+      "Enrique IV"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona a Luis XIV. Los distractores son editoriales.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-24",
+    "module": "Mitología",
+    "source": "Banco examen CES 2010, PDF p. 8, referencia a Minerva; pregunta didáctica elaborada desde el tema.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿A qué diosa romana se asocia tradicionalmente la sabiduría y las artes estratégicas?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "Minerva",
+      "Venus",
+      "Vesta",
+      "Diana"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona a Minerva. La formulación es una pregunta didáctica, no una transcripción literal.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-25",
+    "module": "Historia",
+    "source": "Banco examen CES 2010, PDF p. 9, referencia a Tenochtitlan; variante didáctica de src10-17.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué ciudad fue conquistada por los mexicas y se convirtió en el centro de su imperio?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "Tenochtitlan",
+      "Teotihuacán",
+      "Palenque",
+      "Monte Albán"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona Tenochtitlan. Este ítem es una variante del tema ya presente y debe etiquetarse para evitar duplicidad.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-26",
+    "module": "Literatura",
+    "source": "Banco examen CES 2010, PDF p. 8; variante de src10-20.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué escritor recibió el Premio Nobel de Literatura de 2009 según el banco CES 2010?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "Herta Müller",
+      "Günter Grass",
+      "José Saramago",
+      "Orhan Pamuk"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente identifica a Herta Müller. Es un duplicado temático deliberado para práctica, no cobertura adicional.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-27",
+    "module": "Ciencias básicas",
+    "source": "Banco examen CES 2010, ciencias básicas, PDF p. 10; reformulación conceptual del tema.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "¿Qué enlace covalente une nucleótidos consecutivos dentro de una misma cadena de ADN?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "Enlace fosfodiéster",
+      "Puente de hidrógeno",
+      "Enlace peptídico",
+      "Enlace glucosídico"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El enlace fosfodiéster forma el esqueleto azúcar-fosfato de la cadena. Los puentes de hidrógeno contribuyen a aparear bases entre hebras.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "src10-28",
+    "module": "Ciencias básicas",
+    "source": "Banco examen CES 2010, ciencias básicas, PDF p. 10; reformulación conceptual del tema.",
+    "sourceShort": "CES 2009/2010 · reconstrucción",
+    "type": "single",
+    "q": "Durante la transcripción, ¿qué molécula utiliza la ARN polimerasa como molde?",
+    "desc": "Pregunta reconstruida o elaborada desde el tema citado. No es una transcripción literal; opciones incorrectas editoriales. Pendiente de validación independiente.",
+    "options": [
+      "ADN",
+      "Proteína",
+      "Lípido",
+      "Polisacárido"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La ARN polimerasa utiliza una hebra de ADN como molde para sintetizar ARN. Este ítem ya aparece en el lote anterior con otra identificación; revisar duplicidad antes de publicar ambos.",
+    "hint": "Contrasta el tema con la página indicada en el documento original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-02",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 3, PDF p. 1 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2009 · P3",
+    "type": "single",
+    "q": "¿En qué año se hundió el Titanic?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "1912",
+      "1905",
+      "1918",
+      "1923"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente indica la noche del 14 al 15 de abril de 1912. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-03",
+    "module": "Literatura",
+    "source": "Banco examen CES 2009, pregunta 5, PDF p. 2 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2009 · P5",
+    "type": "single",
+    "q": "¿Quién escribió la novela «Los miserables»?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Victor Hugo",
+      "Alexandre Dumas",
+      "Émile Zola",
+      "Gustave Flaubert"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento identifica a Victor Hugo como autor. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-04",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009, pregunta 13, PDF p. 8 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2009 · P13",
+    "type": "single",
+    "q": "¿Cuál de estos países no es atravesado por el río Danubio, según la fuente?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Albania",
+      "Austria",
+      "Hungría",
+      "Rumania"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente señala Albania; enumera otros países por los que pasa el Danubio. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-05",
+    "module": "Historia",
+    "source": "Banco examen CES 2009, pregunta 16, PDF p. 10 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2009 · P16",
+    "type": "single",
+    "q": "¿Quién recibió el Premio Nobel de Literatura en 2008, según el banco?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Jean-Marie Gustave Le Clézio",
+      "Orhan Pamuk",
+      "Albert Camus",
+      "Mario Vargas Llosa"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente del banco señala a Jean-Marie Gustave Le Clézio. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-06",
+    "module": "Literatura",
+    "source": "Banco examen CES 2009, pregunta 24, PDF p. 14 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2009 · P24",
+    "type": "single",
+    "q": "¿Qué obra de Shakespeare se asocia en la fuente con los celos?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Otelo",
+      "Hamlet",
+      "Macbeth",
+      "La tempestad"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco relaciona Otelo con el tema de los celos. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec10-01",
+    "module": "Geografía",
+    "source": "Banco examen CES 2010, pregunta 2, PDF p. 1 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2010 · P2",
+    "type": "single",
+    "q": "¿Cuál es el río principal que cruza Madrid, según la fuente?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Manzanares",
+      "Tajo",
+      "Ebro",
+      "Guadalquivir"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento identifica el río Manzanares y lo relaciona con la cuenca del Jarama y del Tajo. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec10-02",
+    "module": "Literatura",
+    "source": "Banco examen CES 2010, pregunta 9, PDF p. 3 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2010 · P9",
+    "type": "single",
+    "q": "¿Quién escribió «Los tres mosqueteros»?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Alexandre Dumas padre",
+      "Victor Hugo",
+      "Hermann Hesse",
+      "Émile Zola"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente atribuye la novela a Alexandre Dumas padre. Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec10-04",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2010, pregunta 21, PDF p. 7 Distractores editoriales; respuesta conservada de la fuente, pendiente de validación independiente.",
+    "sourceShort": "CES 2010 · P21",
+    "type": "single",
+    "q": "¿Qué cargo ocupó Kofi Annan en las Naciones Unidas entre 1997 y 2006?",
+    "desc": "Recuperación textual de una pregunta del banco; no es transcripción literal de todas las opciones originales.",
+    "options": [
+      "Secretario general",
+      "Presidente de la Asamblea General durante todo el periodo",
+      "Presidente de la Corte Internacional de Justicia",
+      "Director de la UNESCO"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La explicación de la fuente lo identifica correctamente como Secretario General, aunque el enunciado original usa «presidente de la ONU». Los distractores fueron añadidos editorialmente.",
+    "hint": "Repasa el tema y contrasta con la fuente original.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-01",
+    "module": "Cultura general",
+    "source": "Banco examen CES 2009 · p. 10",
+    "sourceShort": "RECUPERADA · CES 09/10",
+    "type": "single",
+    "q": "¿Quién fue uno de los fundadores de la National Geographic Society mencionado en el banco CES 2009?",
+    "desc": "Enunciado reconstruido a partir del contenido textual de la fuente. No se presenta como transcripción literal completa.",
+    "options": [
+      "Gardiner Greene Hubbard",
+      "Alexander Graham Bell",
+      "Theodore Roosevelt",
+      "David Livingstone"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El documento identifica a Gardiner Greene Hubbard como fundador de la National Geographic Society.",
+    "hint": "Revisa el tema y la referencia de origen antes de memorizar la respuesta.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-03-v10-que-tragedia-de-willia",
+    "module": "Literatura",
+    "source": "Banco examen CES 2009 · p. 14",
+    "sourceShort": "RECUPERADA · CES 09/10",
+    "type": "single",
+    "q": "¿Qué tragedia de William Shakespeare tiene los celos como tema central y presenta a Otelo?",
+    "desc": "Enunciado reconstruido a partir del contenido textual de la fuente. No se presenta como transcripción literal completa.",
+    "options": [
+      "Otelo",
+      "Hamlet",
+      "Macbeth",
+      "El rey Lear"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente relaciona a Otelo con los celos. La pregunta se normaliza como identificación de la obra.",
+    "hint": "Revisa el tema y la referencia de origen antes de memorizar la respuesta.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec09-04-v10-en-que-pais-tuvo-lugar",
+    "module": "Historia",
+    "source": "Banco examen CES 2009 · p. 15",
+    "sourceShort": "RECUPERADA · CES 09/10",
+    "type": "single",
+    "q": "¿En qué país tuvo lugar la Guerra Civil estadounidense del siglo XIX?",
+    "desc": "Enunciado reconstruido a partir del contenido textual de la fuente. No se presenta como transcripción literal completa.",
+    "options": [
+      "Estados Unidos",
+      "México",
+      "España",
+      "Canadá"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "La fuente menciona la Guerra Civil de Estados Unidos.",
+    "hint": "Revisa el tema y la referencia de origen antes de memorizar la respuesta.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec10-01-v10-que-acontecimiento-pol",
+    "module": "Historia",
+    "source": "Banco examen CES 2010 · p. 4",
+    "sourceShort": "RECUPERADA · CES 09/10",
+    "type": "single",
+    "q": "¿Qué acontecimiento político se asocia con la Declaración de los Derechos del Hombre y del Ciudadano de 1789?",
+    "desc": "Enunciado reconstruido a partir del contenido textual de la fuente. No se presenta como transcripción literal completa.",
+    "options": [
+      "Revolución francesa",
+      "Revolución rusa",
+      "Independencia de India",
+      "Revolución mexicana"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco vincula la declaración de 1789 con la Revolución francesa.",
+    "hint": "Revisa el tema y la referencia de origen antes de memorizar la respuesta.",
+    "verified": false,
+    "warning": true
+  },
+  {
+    "id": "rec10-05",
+    "module": "Geografía e historia",
+    "source": "Banco examen CES 2010 · p. 9",
+    "sourceShort": "RECUPERADA · CES 09/10",
+    "type": "single",
+    "q": "¿Cuál es el nombre de la antigua capital mexica situada en el lugar donde se desarrolló la actual Ciudad de México?",
+    "desc": "Enunciado reconstruido a partir del contenido textual de la fuente. No se presenta como transcripción literal completa.",
+    "options": [
+      "Tenochtitlan",
+      "Teotihuacán",
+      "Chichén Itzá",
+      "Palenque"
+    ],
+    "correct": [
+      0
+    ],
+    "explain": "El banco menciona Tenochtitlan en el contexto histórico de México.",
+    "hint": "Revisa el tema y la referencia de origen antes de memorizar la respuesta.",
+    "verified": false,
+    "warning": true
+  }
+];
+let moduleFilter="Todos",idx=0,selected=[],answered={},hintShown=false,streak=0;
+const $=id=>document.getElementById(id);
+function activeQuestions(){return questions.filter(q=>moduleFilter==="Todos"||q.module===moduleFilter)}
+function loadState(){try{const s=JSON.parse(localStorage.getItem("academiaCES_v2")||"{}");answered=s.answered||{};streak=s.streak||0}catch(e){answered={};streak=0}}
+function saveState(){try{localStorage.setItem("academiaCES_v2",JSON.stringify({answered,streak}))}catch(e){}}
+function current(){const arr=activeQuestions();if(idx>=arr.length)idx=0;return arr[idx]}
+function renderModules(){document.querySelectorAll(".module").forEach(b=>{b.classList.toggle("active",b.dataset.module===moduleFilter);b.setAttribute("aria-pressed",b.dataset.module===moduleFilter?"true":"false")})}
+function render(){const arr=activeQuestions();if(!arr.length)return;const q=current();selected=[];hintShown=false;
+$("qModule").textContent=q.module.toUpperCase();$("qSource").textContent=q.sourceShort;$("qType").textContent=q.type==="multi"?"Selección múltiple":q.type==="review"?"Control de calidad":"Selección única";
+$("qWarning").classList.toggle("hidden",!q.warning);$("qCount").textContent=`Pregunta ${idx+1} de ${arr.length}`;$("progressBar").style.width=`${(idx/arr.length)*100}%`;
+$("qTitle").textContent=q.q;$("qDesc").textContent=q.desc;
+$("options").innerHTML="";q.options.forEach((t,i)=>{const b=document.createElement("button");b.className="option";b.type="button";b.innerHTML=`<span class="letter">${q.type==="multi"?"□":String.fromCharCode(65+i)}</span><span></span>`;b.querySelector("span:nth-child(2)").textContent=t;b.onclick=()=>choose(i);b.dataset.index=i;$("options").appendChild(b)});
+$("feedback").className="feedback hidden";$("feedback").innerHTML="";$("hintArea").classList.add("hidden");$("hintArea").textContent="";
+$("hintBtn").classList.remove("hidden");$("checkBtn").classList.remove("hidden");$("checkBtn").disabled=true;$("nextBtn").classList.add("hidden");
+if(answered[q.id])showAnswered(q,answered[q.id]);updateStats();renderModules()}
+function choose(i){const q=current();if(answered[q.id])return;if(q.type==="multi"){selected=selected.includes(i)?selected.filter(n=>n!==i):[...selected,i]}else selected=[i];document.querySelectorAll(".option").forEach((b,n)=>{b.classList.toggle("selected",selected.includes(n));b.querySelector(".letter").textContent=q.type==="multi"?(selected.includes(n)?"✓":"□"):String.fromCharCode(65+n)});$("checkBtn").disabled=!selected.length}
+function showHint(){const q=current();$("hintArea").textContent="💡 Pista: "+q.hint;$("hintArea").classList.remove("hidden")}
+function check(){const q=current();if(!selected.length||answered[q.id])return;const right=selected.length===q.correct.length&&selected.every(x=>q.correct.includes(x));answered[q.id]={selected:[...selected],right};streak=right?streak+1:0;saveState();showAnswered(q,answered[q.id]);updateStats()}
+function showAnswered(q,result){document.querySelectorAll(".option").forEach((b,i)=>{b.disabled=true;b.classList.remove("selected");if(q.correct.includes(i))b.classList.add("correct");else if(result.selected.includes(i))b.classList.add("wrong");b.querySelector(".letter").textContent=q.correct.includes(i)?"✓":result.selected.includes(i)?"×":(q.type==="multi"?"□":String.fromCharCode(65+i))});
+const f=$("feedback");f.className="feedback "+(result.right?"good":"bad");f.innerHTML=`<h3>${result.right?"✨ ¡Buen trabajo!":"📚 Vamos a aprender de este intento"}</h3><p>${q.type==="multi"?"Compara el conjunto seleccionado con todas las respuestas que indica la fuente.":""}</p><p></p><p></p>`;f.querySelectorAll("p")[1].textContent=q.explain;
+const source=document.createElement("p");source.className="muted";source.style.fontSize=".82rem";
+const urlMatch=q.source.match(/https?:\/\/[^\s]+/);
+source.append("Trazabilidad: "+q.source.replace(/https?:\/\/[^\s]+/,"").trim()+" ");
+if(urlMatch){const link=document.createElement("a");link.href=urlMatch[0].replace(/[),.;]+$/,"");link.textContent="Consultar referencia externa";link.target="_blank";link.rel="noopener noreferrer";link.style.color="#6d28d9";link.style.fontWeight="700";source.appendChild(link)}
+f.appendChild(source);
+if(q.warning||!q.verified){const warn=document.createElement("p");warn.className="hintbox";warn.textContent="⚠️ Esta entrada requiere revisión editorial antes de usarse como pregunta de evaluación formal.";f.appendChild(warn)}
+f.classList.remove("hidden");$("hintBtn").classList.add("hidden");$("checkBtn").classList.add("hidden");$("nextBtn").classList.remove("hidden");$("progressBar").style.width=`${((idx+1)/activeQuestions().length)*100}%`}
+function updateStats(){const vals=Object.values(answered);const done=vals.length,correct=vals.filter(v=>v.right).length;const total=activeQuestions().length;const doneCurrent=activeQuestions().filter(q=>answered[q.id]).length;$("statDone").textContent=done;$("statScore").textContent=done?Math.round(correct/done*100)+"%":"—";$("statStreak").textContent=streak;$("sideCorrect").textContent=correct;$("sideWrong").textContent=vals.filter(v=>!v.right).length;$("sidePending").textContent=Math.max(0,total-doneCurrent)}
+$("checkBtn").addEventListener("click",check);$("hintBtn").addEventListener("click",showHint);$("nextBtn").addEventListener("click",()=>{idx=(idx+1)%activeQuestions().length;render()});
+document.querySelectorAll(".module").forEach(b=>b.addEventListener("click",()=>{moduleFilter=b.dataset.module;idx=0;render()}));
+$("resetProgress").addEventListener("click",()=>{if(confirm("¿Reiniciar todo el progreso guardado en este navegador?")){answered={};streak=0;saveState();render()}});
+loadState();render();
+</script>
+
+<footer style="max-width:1180px;margin:0 auto 28px;padding:18px 20px;color:#667085;font-size:.85rem;line-height:1.5;border-top:1px solid #e5e7eb">
+<strong>ACADEMIA CES · Proyecto independiente de práctica.</strong> No es un sitio oficial de la institución CES ni sustituye materiales oficiales, asesoría docente o evaluación formal. Banco actual: 105 preguntas. El progreso queda guardado localmente en este navegador; otra persona que abra el enlace tendrá su propio progreso.
+</footer>
+</body></html>
